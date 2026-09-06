@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YAHIVO — Homepage Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --bg2:#141414; --fg:#F5F5F5; --accent:#F27D26; --line:rgba(255,255,255,.1);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Work Sans',sans-serif;}
+  h1,h2,h3,.heading{font-family:'Syne',sans-serif;letter-spacing:-0.03em;font-weight:800;}
+  .mono{font-family:'Space Grotesk',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  /* Announcement bar */
+  .announce{background:var(--bg);border-bottom:1px solid var(--line);text-align:center;padding:8px 16px;
+    font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg);opacity:.9;}
+  .announce span{color:var(--accent);}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding:16px 24px;}
+  .header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  nav.main-nav{display:flex;gap:28px;flex-wrap:wrap;}
+  nav.main-nav a{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,245,245,.75);font-weight:700;}
+  nav.main-nav a:hover{color:var(--accent);}
+  .logo{text-align:center;}
+  .logo .word{font-size:28px;font-weight:800;text-transform:uppercase;}
+  .logo .word span{color:var(--accent);}
+  .logo .sub{display:block;font-family:'Space Grotesk',monospace;font-size:9px;letter-spacing:.35em;color:rgba(245,245,245,.4);text-transform:uppercase;margin-top:-2px;}
+  .cart-btn{background:var(--accent);color:#000;border:none;padding:10px 16px;display:flex;align-items:center;gap:8px;font-weight:800;font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.1em;cursor:pointer;}
+  .cart-btn .count{background:#000;color:#fff;font-size:10px;padding:2px 6px;}
+
+  /* Hero */
+  .hero{display:flex;flex-wrap:wrap;min-height:80vh;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+  .hero-media{flex:1 1 480px;min-height:420px;background:#000;position:relative;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:contrast(1.05) brightness(.92);}
+  .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#0A0A0A,rgba(0,0,0,.3) 60%,rgba(0,0,0,.2));}
+  .hero-tag{position:absolute;top:20px;left:20px;z-index:2;display:flex;gap:10px;flex-wrap:wrap;}
+  .pill{background:rgba(10,10,10,.85);border:1px solid rgba(255,255,255,.15);padding:6px 12px;font-family:'Space Grotesk',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+  .hero-content{flex:1 1 480px;padding:56px 48px;display:flex;flex-direction:column;justify-content:center;gap:28px;}
+  .eyebrow{color:var(--accent);font-size:13px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;}
+  .hero-content h1{font-size:clamp(38px,6vw,74px);line-height:.92;text-transform:uppercase;margin:0;}
+  .stroke{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.85);}
+  .hero-content p{font-size:17px;color:rgba(245,245,245,.7);max-width:480px;line-height:1.6;}
+  .spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;font-family:'Space Grotesk',monospace;font-size:11px;max-width:520px;}
+  .spec-box{border:1px solid var(--line);background:rgba(255,255,255,.03);padding:10px 12px;}
+  .spec-box b{display:block;font-size:14px;}
+  .spec-box.accent b{color:var(--accent);}
+  .spec-box span{display:block;font-size:9px;letter-spacing:.15em;color:rgba(245,245,245,.5);text-transform:uppercase;margin-top:2px;}
+  .cta-row{display:flex;gap:24px;flex-wrap:wrap;align-items:center;}
+  .cta-link{display:flex;align-items:center;gap:10px;border-bottom:2px solid #fff;padding-bottom:6px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;cursor:pointer;}
+  .cta-link:hover{border-color:var(--accent);color:var(--accent);}
+  .cta-btn{background:var(--bg2);border:1px solid var(--line);color:#fff;padding:12px 20px;font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;cursor:pointer;}
+  .cta-btn:hover{background:rgba(255,255,255,.08);}
+
+  /* Product grid */
+  .section-title{max-width:1400px;margin:0 auto;padding:64px 24px 24px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;}
+  .section-title h2{font-size:clamp(28px,4vw,44px);text-transform:uppercase;margin:0;}
+  .section-title .tag{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;font-weight:700;}
+  .grid{max-width:1400px;margin:0 auto;padding:0 24px 72px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;}
+  .card{border:1px solid var(--line);background:#0d0d0d;display:flex;flex-direction:column;transition:border-color .2s;}
+  .card:hover{border-color:rgba(255,255,255,.3);}
+  .card .img-wrap{aspect-ratio:1/1;background:#111;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .card .img-wrap img{width:100%;height:100%;object-fit:cover;}
+  .card .info{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1;}
+  .card .name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;line-height:1.3;}
+  .card .price{font-family:'Space Grotesk',monospace;font-size:14px;color:var(--accent);font-weight:700;}
+  .card .addbtn{margin-top:auto;border:1px solid var(--line);background:transparent;color:#fff;padding:10px;font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;}
+  .card .addbtn:hover{background:var(--accent);color:#000;border-color:var(--accent);}
+
+  /* Split showcase */
+  .split{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .split > div{flex:1 1 400px;min-height:360px;position:relative;display:flex;align-items:flex-end;padding:40px;}
+  .split img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55);}
+  .split .txt{position:relative;z-index:1;}
+  .split h3{font-size:26px;text-transform:uppercase;margin:0 0 8px;}
+  .split a{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+
+  /* Pull quote */
+  .quote{max-width:900px;margin:0 auto;padding:96px 24px;text-align:center;}
+  .quote p{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,42px);font-weight:800;line-height:1.2;text-transform:uppercase;}
+  .quote p .accent{color:var(--accent);}
+  .quote .btn{margin-top:28px;display:inline-block;background:var(--accent);color:#000;padding:14px 28px;font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;cursor:pointer;}
+
+  footer{border-top:1px solid var(--line);padding:56px 24px 32px;}
+  .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;}
+  .footer-col h4{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,245,245,.5);margin-bottom:14px;}
+  .footer-col a{display:block;font-size:14px;color:rgba(245,245,245,.8);margin-bottom:8px;}
+  .footer-col a:hover{color:var(--accent);}
+  .footer-bottom{max-width:1400px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--line);font-family:'Space Grotesk',monospace;font-size:11px;color:rgba(245,245,245,.4);text-align:center;}
+
+  /* Cart drawer */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:60;opacity:0;pointer-events:none;transition:opacity .2s;}
+  .overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,92vw);background:#0e0e0e;border-left:1px solid var(--line);z-index:61;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;}
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .drawer-head b{font-family:'Syne',sans-serif;text-transform:uppercase;}
+  .drawer-body{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px;}
+  .drawer-item{display:flex;gap:12px;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .drawer-item img{width:64px;height:64px;object-fit:cover;}
+  .drawer-item .name{font-size:13px;font-weight:600;}
+  .drawer-item .price{font-family:'Space Grotesk',monospace;color:var(--accent);font-size:12px;}
+  .close-x{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;}
+  .empty{opacity:.5;font-size:13px;text-align:center;padding:40px 0;}
+
+  .note{max-width:1400px;margin:0 auto;padding:16px 24px;font-family:'Space Grotesk',monospace;font-size:11px;color:rgba(255,255,255,.4);text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <span>•</span> AUTOMOTIVE STREETWEAR, BUILT FOR THE UAE <span>•</span> 30-DAY RETURNS, NO FINE PRINT <span>•</span>
+</div>
+
+<header>
+  <div class="header-inner">
+    <nav class="main-nav">
+      <a href="#catalog">ALL PRODUCTS</a>
+      <a href="#catalog">HOODIES</a>
+    </nav>
+    <div class="logo">
+      <div class="word">YAHIVO<span>.</span></div>
+      <span class="sub">Automotive Streetwear • UAE • Est. 2026</span>
+    </div>
+    <button class="cart-btn" onclick="document.getElementById('overlay').classList.add('open');document.getElementById('drawer').classList.add('open');">
+      🛍 CART <span class="count">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-media">
+    <div class="hero-tag">
+      <div class="pill"><span class="dot"></span> YHV LINE — HEAVYWEIGHT SERIES</div>
+    </div>
+    <img src="https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-stealth-redline-heavyweight-hoodie.png" alt="YAHIVO Stealth Redline Heavyweight Hoodie">
+  </div>
+  <div class="hero-content">
+    <span class="eyebrow">Built For The Drive</span>
+    <h1>ENGINEERED<br><span class="stroke">FOR THE</span><br>RESTLESS SOUL</h1>
+    <p>Original automotive-inspired streetwear, designed in the UAE. Heavyweight fleece cut for AC-cold interiors and everything after.</p>
+    <div class="spec-grid">
+      <div class="spec-box"><b>500 G/M²</b><span>Heavyweight fleece</span></div>
+      <div class="spec-box"><b>OVERSIZED</b><span>Drop-shoulder fit</span></div>
+      <div class="spec-box accent"><b>30-DAY</b><span>Easy returns</span></div>
+    </div>
+    <div class="cta-row">
+      <div class="cta-link" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Shop The Line →</div>
+      <button class="cta-btn" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">View All Hoodies</button>
+    </div>
+  </div>
+</section>
+
+<div class="section-title" id="catalog">
+  <h2>THE CURRENT LINE</h2>
+  <span class="tag">7 Designs • Live Now</span>
+</div>
+<div class="grid" id="product-grid"></div>
+
+<div class="split">
+  <div>
+    <img src="https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-tokyo-rising-sun-heavyweight-hoodie.png" alt="Tokyo Rising Sun Hoodie">
+    <div class="txt">
+      <h3>Tokyo Rising Sun</h3>
+      <a href="#catalog">Shop Now →</a>
+    </div>
+  </div>
+  <div>
+    <img src="https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-crown-signature-heavyweight-hoodie.png" alt="Crown Signature Hoodie">
+    <div class="txt">
+      <h3>Crown Signature</h3>
+      <a href="#catalog">Shop Now →</a>
+    </div>
+  </div>
+</div>
+
+<div class="quote">
+  <p>Not a jersey. Not a knockoff. Just <span class="accent">original</span> automotive streetwear.</p>
+  <div class="btn" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Shop The Collection</div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#catalog">All Hoodies</a>
+      <a href="#catalog">New In</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Shipping (7–14 days)</a>
+      <a href="#">Returns (30 days)</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>YAHIVO</h4>
+      <a href="#">Our Story</a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 YAHIVO. All rights reserved.</div>
+</footer>
+
+<div class="note">Design preview only — not connected to your live Shopify store or checkout.</div>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head"><b>Your Cart</b><button class="close-x" onclick="closeCart()">✕</button></div>
+  <div class="drawer-body" id="drawer-body"><div class="empty">Your cart is empty</div></div>
+</div>
+
+<script>
+const PRODUCTS = [
+  {name:"YAHIVO Stealth Redline Heavyweight Hoodie", price:119.24, img:"https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-stealth-redline-heavyweight-hoodie.png"},
+  {name:"YAHIVO Crown Signature Heavyweight Hoodie", price:121.46, img:"https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-crown-signature-heavyweight-hoodie.png"},
+  {name:"YAHIVO Heritage Athletic Heavyweight Hoodie", price:131.46, img:"https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-heritage-athletic-heavyweight-hoodie_5dfb727b-c5a9-4ce1-9adf-ff63f15ed9f4.png"},
+  {name:"YAHIVO Tokyo Rising Sun Heavyweight Hoodie", price:132.46, img:"https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-tokyo-rising-sun-heavyweight-hoodie.png"},
+  {name:"YAHIVO Mountain Road Heavyweight Boxy Hoodie", price:133.00, img:"https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-mountain-road-boxy-hoodie-flat.png"},
+  {name:"YAHIVO Minimal Monogram Fleece Hoodie", price:114.77, img:"https://cdn.shopify.com/s/files/1/0755/1447/8786/files/yahivo-minimal-monogram-fleece-hoodie-front.png"},
+  {name:"YAHIVO Oversized Fleece Hoodie — Pink & Apricot", price:153.52, img:"https://cdn.shopify.com/s/files/1/0755/1447/8786/files/0c5127a6772f43108af6a0c9bb6d40c6_bf98431e-090d-4c41-a512-8e8aca1bf812.png"}
+];
+const grid = document.getElementById('product-grid');
+PRODUCTS.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="img-wrap"><img src="${p.img}" alt="${p.name}"></div>
+    <div class="info">
+      <div class="name">${p.name}</div>
+      <div class="price mono">$${p.price.toFixed(2)}</div>
+      <button class="addbtn" data-i="${i}">Add to Cart</button>
+    </div>`;
+  grid.appendChild(card);
+});
+
+let cart = [];
+function closeCart(){ document.getElementById('overlay').classList.remove('open'); document.getElementById('drawer').classList.remove('open'); }
+function renderCart(){
+  const body = document.getElementById('drawer-body');
+  const count = document.querySelector('.cart-btn .count');
+  count.textContent = cart.length;
+  if(!cart.length){ body.innerHTML = '<div class="empty">Your cart is empty</div>'; return; }
+  body.innerHTML = cart.map(p => `
+    <div class="drawer-item">
+      <img src="${p.img}" alt="${p.name}">
+      <div>
+        <div class="name">${p.name}</div>
+        <div class="price">$${p.price.toFixed(2)}</div>
+      </div>
+    </div>`).join('');
+}
+grid.addEventListener('click', e => {
+  if(e.target.classList.contains('addbtn')){
+    const p = PRODUCTS[e.target.dataset.i];
+    cart.push(p);
+    renderCart();
+    document.getElementById('overlay').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+  }
+});
+</script>
+
+</body>
+</html>
